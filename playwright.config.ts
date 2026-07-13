@@ -28,6 +28,11 @@ export default defineConfig({
   projects: [
     { name: 'setup', testMatch: /.*\.setup\.ts/ },
     {
+      name: 'chromium-negative-login',
+      testMatch: /login-negative\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] }, // no storageState here
+    },
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'],
         storageState: './playwright/.auth/user.json'

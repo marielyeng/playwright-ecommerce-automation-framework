@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { login, verifySuccessfulLogin } from '../pages/Login';
 
 const authFile = path.resolve(__dirname, '../../playwright/.auth/user.json');
@@ -17,6 +17,7 @@ test('should login and save auth state', async ({ page }) => {
     await login(page, loginData.username, loginData.password);
 
     await verifySuccessfulLogin(page);
+    await expect(page).toHaveURL('inventory.html');
     await page.context().storageState({ path: authFile });
 
 })

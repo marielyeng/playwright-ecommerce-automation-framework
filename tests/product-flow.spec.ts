@@ -9,6 +9,7 @@ test('should add products to cart and verify the cart', async ({ page }) => {
         await login(page, 'standard_user', 'secret_sauce');
 
         await verifySuccessfulLogin(page);
+        await expect(page).toHaveURL('inventory.html');
         const firstProduct = await products.addProductToCart(page, 0);
 
         const { cartHeading, qtyLabel, descriptionLabel } = await cart.cartItems(page, 'Your Cart', 'QTY', 'DESCRIPTION');
@@ -25,6 +26,7 @@ test('should be able to click product label and add products to cart', async ({ 
         await page.goto('');
         await login(page, 'standard_user', 'secret_sauce');
         await verifySuccessfulLogin(page);
+        await expect(page).toHaveURL('inventory.html');
 
         const firstProduct = page.locator('[data-test="inventory-item-name"]').first();
         const productName = await firstProduct.textContent();
